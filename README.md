@@ -1,6 +1,6 @@
 # Infinite Scroll
 
-<img src="https://user-images.githubusercontent.com/61354600/127081197-0941eadf-6e8a-483a-814e-914b5859b05d.gif" alt="이미지"/>
+<img src="https://user-images.githubusercontent.com/61354600/127082223-091a92be-7f8e-4dc9-a440-baeaefb3916c.gif" alt="이미지"/>
 
 ## Getting Started
 
@@ -23,3 +23,7 @@
 - react-hook
 - styled-components
 - styled-reset
+
+## Thanks 👍
+
+https://github.com/hayanmind/front-ta-1
