@@ -13,7 +13,7 @@ const InfiObserverList = () => {
       .then((res) => res.json())
       .then((item) => {
         setItems((prev) => [...prev, ...item]);
-        setLoading(false);
+        setLoading(true);
       });
   };
 
