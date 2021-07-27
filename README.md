@@ -17,6 +17,19 @@
    npm start
    ```
 
+## Reference
+
+```
+ InfiniteScrollList, InfiniteObserverList 두개의 컴포넌트가 App.js 에서 import 하고 있음
+ 하나씩 주석을 통해 확인이 가능함
+
+ InfiniteScrollList 컴포넌트는 스크롤 이벤트를 통해 구현
+
+ InfiniteObserverList 컴포넌트의 경우 옵져버(IntersectionObserver) 를 통해 구현
+```
+
+App.js
+
 ## Use
 
 - CRA(create-react-app)

@@ -1,11 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CommentItem from "components/CommentItem";
 
 const InfiniteScrollList = () => {
   const [page, setPage] = useState(1);
   const [items, setItems] = useState([]);
-
-  const observer = useRef();
 
   const getFetchData = () => {
     const url = `https://jsonplaceholder.typicode.com/comments?_page=${page}&_limit=10`;
@@ -16,46 +14,28 @@ const InfiniteScrollList = () => {
 
   useEffect(() => getFetchData(), [page]);
 
-  const onIntersect = (entries, observer) => {
-    const target = entries[0];
-    console.log(target, observer);
-    if (target.isIntersecting) setPage((p) => p + 1);
-  };
-
   useEffect(() => {
-    if (!observer.current) {
-      return;
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  const onScroll = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage((prev) => prev + 1);
     }
-
-    const io = new IntersectionObserver(onIntersect, { threshold: 1 });
-    io.observe(observer.current);
-
-    return () => io && io.disconnect();
-  }, [observer]);
-
-  //   useEffect(() => {
-  //     window.addEventListener("scroll", onScroll);
-  //     return () => {
-  //       window.removeEventListener("scroll", onScroll);
-  //     };
-  //   }, []);
-
-  //   const onScroll = () => {
-  //     const scrollTop = document.documentElement.scrollTop;
-  //     const clientHeight = document.documentElement.clientHeight;
-  //     const scrollHeight = document.documentElement.scrollHeight;
-
-  //     if (scrollTop + clientHeight >= scrollHeight) {
-  //       setPage((prev) => prev + 1);
-  //     }
-  //   };
+  };
 
   return (
     <div>
       {items?.map((item) => (
         <CommentItem key={item.id} item={item} />
       ))}
-      <div ref={observer} />
     </div>
   );
 };
