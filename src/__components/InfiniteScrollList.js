@@ -14,8 +14,38 @@ const InfiniteScrollList = () => {
 
   useEffect(() => getFetchData(), [page]);
 
+  const optimizeAnimation = (callback) => {
+    let ticking = false;
+
+    return () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          callback();
+          ticking = false;
+        });
+      }
+    };
+  };
+
+  const toFitScroll = (cb) => {
+    let tick = false;
+
+    return function trigger() {
+      if (tick) {
+        return;
+      }
+      tick = true;
+      return requestAnimationFrame(function task() {
+        tick = false;
+        return cb();
+      });
+    };
+  };
+
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", toFitScroll(onScroll));
+    // window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
