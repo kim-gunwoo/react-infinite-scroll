@@ -1,39 +1,34 @@
 import { useRef, useState, useEffect } from "react";
 import CommentItem from "components/CommentItem";
 
-const InfiObserverList = () => {
-  const [page, setPage] = useState(1);
+const InfiniteObserverList = () => {
+  const [page, setPage] = useState(0);
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
   const observer = useRef();
 
   const getFetchData = () => {
     const url = `https://jsonplaceholder.typicode.com/comments?_page=${page}&_limit=10`;
     fetch(url)
       .then((res) => res.json())
-      .then((item) => {
-        setItems((prev) => [...prev, ...item]);
-        setLoading(false);
-      });
+      .then((item) => setItems((prev) => [...prev, ...item]));
   };
 
-  useEffect(() => getFetchData(), [page]);
+  useEffect(() => page !== 0 && getFetchData(), [page]);
 
-  const onIntersect = (entries) => {
+  const onIntersect = (entries, observer) => {
     const target = entries[0];
+    console.log(target, observer);
     if (target.isIntersecting) setPage((p) => p + 1);
   };
 
   useEffect(() => {
     if (!observer.current) return;
 
-    if (loading) {
-      const io = new IntersectionObserver(onIntersect, { threshold: 1 });
-      io.observe(observer.current);
+    const io = new IntersectionObserver(onIntersect, { threshold: 1 });
+    io.observe(observer.current);
 
-      return () => io.disconnect();
-    }
-  }, [loading]);
+    return () => io && io.disconnect();
+  }, [observer]);
 
   return (
     <div>
@@ -45,4 +40,4 @@ const InfiObserverList = () => {
   );
 };
 
-export default InfiObserverList;
+export default InfiniteObserverList;

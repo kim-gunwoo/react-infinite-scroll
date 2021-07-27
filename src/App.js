@@ -1,5 +1,4 @@
-import InfiniteScrollList from "./components/InfiniteScrollList";
-import InfiniteObserverList from "./components/InfiniteObserverList";
+import InfiniteObserverList from "components/InfiniteObserverList";
 
 const styles = {
   container: {
@@ -13,7 +12,6 @@ const styles = {
 function App() {
   return (
     <div style={styles.container}>
-      <InfiniteScrollList />
       <InfiniteObserverList />
     </div>
   );
