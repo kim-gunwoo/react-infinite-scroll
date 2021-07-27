@@ -3,11 +3,17 @@
 ## Getting Started
 
 1. Clone the repo
-   > https://github.com/kim-gunwoo/react-infinite-scroll.git
+   ```
+   https://github.com/kim-gunwoo/react-infinite-scroll.git
+   ```
 2. Install NPM packages
-   > npm install
+   ```sh
+   npm install
+   ```
 3. Start
-   > npm start
+   ```sh
+   npm start
+   ```
 
 ## Use
 
