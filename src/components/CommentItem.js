@@ -27,14 +27,14 @@ const Container = styled.div`
   background: #f8f9fa;
   border: 0.5px solid #ced4da;
   border-radius: 20px;
-`;
 
-const Wrapper = styled.div`
   font-family: SFProDisplay;
   font-size: 18px;
   color: #212529;
   line-height: 21px;
 `;
+
+const Wrapper = styled.div``;
 
 const Strong = styled.div`
   display: inline-block;
@@ -43,10 +43,10 @@ const Strong = styled.div`
   font-weight: bold;
 `;
 
-const ColName = styled.span``;
-
 const StyledStrong = styled(Strong)`
   margin-bottom: 0;
 `;
+
+const ColName = styled.span``;
 
 const Content = styled.div``;

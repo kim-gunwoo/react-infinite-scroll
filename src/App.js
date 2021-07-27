@@ -14,7 +14,7 @@ function App() {
   return (
     <div style={styles.container}>
       <InfiniteScrollList />
-      <InfiniteObserverList />
+      {/* <InfiniteObserverList /> */}
     </div>
   );
 }
