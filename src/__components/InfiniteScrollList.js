@@ -49,10 +49,11 @@ const InfiniteScrollList = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onScroll = () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
-    const scrollHeight = document.documentElement.scrollHeight;
+  const onScroll = (e) => {
+    const { scrollHeight, scrollTop, clientHeight } = e.target.scrollingElement;
+    // const scrollTop = document.documentElement.scrollTop;
+    // const clientHeight = document.documentElement.clientHeight;
+    // const scrollHeight = document.documentElement.scrollHeight;
 
     if (scrollTop + clientHeight === scrollHeight) {
       setPage((prev) => prev + 1);
