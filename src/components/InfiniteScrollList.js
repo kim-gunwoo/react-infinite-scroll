@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { throttle } from "utils/delay";
 import CommentItem from "components/CommentItem";
 
 const InfiniteScrollList = () => {
@@ -28,6 +29,16 @@ const InfiniteScrollList = () => {
       setPage((prev) => prev + 1);
     }
   };
+
+  const onThrottleScroll = throttle(() => {
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+
+    if (scrollTop + clientHeight === scrollHeight) {
+      setPage((prev) => prev + 1);
+    }
+  }, 300);
 
   return (
     <div>
